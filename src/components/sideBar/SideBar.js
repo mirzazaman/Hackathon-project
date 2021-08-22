@@ -84,20 +84,23 @@ export default function SideBar() {
                         </List>
                         <Divider />
                     </> :
-                    <List>
-                        <Link to='/restaurantLogin'>
-                            <ListItem button>
-                                <ListItemIcon><PersonIcon style={{ color: '#291C25' }} /></ListItemIcon>
-                                <ListItemText primary={'Restaurant Login'} />
-                            </ListItem>
-                        </Link>
-                        <Link to='/restaurantSignup'>
-                            <ListItem button>
-                                <ListItemIcon><PersonAddIcon style={{ color: '#291C25' }} /></ListItemIcon>
-                                <ListItemText primary={'Restaurant Signup'} />
-                            </ListItem>
-                        </Link>
-                    </List>
+                    <>
+                        <List>
+                            <Link to='/restaurantLogin'>
+                                <ListItem button>
+                                    <ListItemIcon><PersonIcon style={{ color: '#291C25' }} /></ListItemIcon>
+                                    <ListItemText primary={'Restaurant Login'} />
+                                </ListItem>
+                            </Link>
+                            <Link to='/restaurantSignup'>
+                                <ListItem button>
+                                    <ListItemIcon><PersonAddIcon style={{ color: '#291C25' }} /></ListItemIcon>
+                                    <ListItemText primary={'Restaurant Signup'} />
+                                </ListItem>
+                            </Link>
+                        </List>
+                        <Divider />
+                    </>
             }
             {
                 isUserLogin ?

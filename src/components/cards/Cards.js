@@ -15,14 +15,14 @@ export default function Cards({ RestaurantList }) {
                                 }}>
                                     <div id="CardsCard" style={{
                                         display: "block",
-                                        width: "20rem",
-                                        margin: "2rem 1rem",
+                                        width: "15rem",
+                                        margin: "2rem",
                                     }}>
 
                                         <center>
                                             <img style={{
                                                 width: '100%',
-                                                height: '200px',
+                                                height: '50%',
 
                                             }} src={item.restImage} />
                                             <div style={{ margin: 10 }}>

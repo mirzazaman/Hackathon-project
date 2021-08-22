@@ -36,7 +36,7 @@ const styles = {
         borderBottom: 'ridge',
     },
     tableDiv: {
-        width: '80%',
+        width: '100%',
         margin: "auto"
     }
 }
