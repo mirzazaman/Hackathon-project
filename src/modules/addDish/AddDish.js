@@ -4,7 +4,7 @@ import useAddDish from './useAddDish'
 
 
 export default function AddDish() {
-    const [dishName, setDishName, enterHandle, addDishHandle, addTaskState] = useAddDish()
+    const [dishName, setDishName, enterHandle, addDishHandle, addTaskState, price, setPrice, category, setCategory, deliveryType, setDeliveryType, setFoodImage] = useAddDish()
 
     return (
         <div>
@@ -18,13 +18,54 @@ export default function AddDish() {
                         <input
                             style={styles.input}
                             type="text"
-                            placeholder="Item Name"
+                            placeholder="Dish Name"
                             required
                             autoFocus
                             value={dishName}
                             onChange={(e) => { setDishName(e.target.value) }}
                             onKeyPress={(e) => { enterHandle(e) }}
                         />
+                        <input
+                            style={styles.input}
+                            type="number"
+                            placeholder="Price in PKR"
+                            required
+                            value={price}
+                            onChange={(e) => { setPrice(e.target.value) }}
+                            onKeyPress={(e) => { enterHandle(e) }}
+                        />
+                        <select
+                            style={styles.input}
+                            value={category}
+                            required
+                            onChange={(e) => { setCategory(e.target.value) }}
+                        >
+                            <option selected disabled>Select Category</option>
+                            <option>Breakfast</option>
+                            <option>Meat Dish</option>
+                            <option>Dessert</option>
+                            <option>Flatbread</option>
+                            <option>Stew</option>
+                            <option>Mutton Dish</option>
+                            <option>Street Food</option>
+                            <option>Snack</option>
+                        </select>
+                        <input
+                            style={styles.input}
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {setFoodImage(e.target.files)}}
+                        />
+                        <select
+                            style={styles.input}
+                            value={deliveryType}
+                            required
+                            onChange={(e) => { setDeliveryType(e.target.value) }}
+                        >
+                            <option selected disabled>Select Delivery Type</option>
+                            <option>Free</option>
+                            <option>Paid</option>
+                        </select>
                         <Button style={{ color: '#030504', marginTop: 10 }} onClick={addDishHandle} >Add</Button>
                     </div>
             }
@@ -49,6 +90,7 @@ const styles = {
         margin: "auto"
     },
     input: {
+        margin: '.5rem',
         border: 'none',
         borderBottom: 'ridge',
         fontSize: 17,

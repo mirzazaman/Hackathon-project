@@ -1,4 +1,4 @@
-import { db } from "../../config/Firebase"
+import { db, storage } from "../../config/Firebase"
 import { ADD_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "../../constants/Types"
 
 
@@ -28,18 +28,26 @@ export const getData = (setTaskState, uid) => async (dispatch) => {
     }
 }
 
-export const addData = (data, uid, setAddTaskState) => async (dispatch) => {
+export const addDish = (data, foodImage, setAddTaskState) => async (dispatch) => {
     try {
-        setAddTaskState(true)
-        await db.collection("Tasks").doc(uid).collection('tasks').add(data)
 
-        dispatch({
-            type: ADD_DATA,
-            payload: data
-        })
+        var imageUrl = ""
+        console.log("image is running..", foodImage);
+        const uploadTask = storage.ref(`images/${foodImage.name}`).put(foodImage);
+
+        await uploadTask.on(() => {
+            storage.ref("images").child(foodImage.name).getDownloadURL().then((url) => {
+                console.log("URL IS =>", url);
+                imageUrl = url
+            });
+        }
+        );
+
+
+        console.log("img in add act", imageUrl);
 
     } catch (error) {
-        console.log("Error in addData Action", error)
+        console.log("Error in addDish Action", error)
 
     } finally {
         setAddTaskState(false)
