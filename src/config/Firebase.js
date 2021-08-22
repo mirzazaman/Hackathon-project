@@ -10,8 +10,10 @@ const firebaseConfig = {
     measurementId: "G-8LTS01JHEX"
 };
 
+
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 export const db = firebase.firestore();
 export const auth = firebase.auth()
+export const storage = firebase.storage();
