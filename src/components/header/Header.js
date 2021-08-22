@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SideBar from '../sideBar/SideBar';
 import MainIcon from '../../assets/MainIcon.png'
 import { Link } from 'react-router-dom'
-
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,11 +22,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
+    const isUserLogin = useSelector(store => store.AuthReducer.isUserLogin);
+    const isRestLogin = useSelector(store => store.AuthReducer.isRestLogin);
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ backgroundColor: 'white' }}>
+            <AppBar position="fixed" style={{ backgroundColor: 'white' }}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <SideBar />
@@ -36,9 +38,28 @@ export default function Header() {
                             <img src={MainIcon} style={{ width: '10rem' }} />
                         </Link>
                     </figture>
-                    <Link to='logout'>
-                        <Button style={{ color: '#ee5c23' }}>Logout</Button>
-                    </Link>
+                    {
+                        isUserLogin ?
+                            <Link to='/userLogout'>
+                                <Button style={{ color: '#030504' }}>Logout</Button>
+                            </Link> :
+                            <>
+                                {
+                                    isRestLogin ?
+                                        <Link to='/restaurantLogout'>
+                                            <Button style={{ color: '#030504' }}>Logout</Button>
+                                        </Link> :
+                                        <>
+                                            <Link to='/userLogin'>
+                                                <Button style={{ color: '#030504' }}>Login</Button>
+                                            </Link>
+                                            <Link to='/restaurantLogin'>
+                                                <Button variant='' style={{ color: '#030504' }}>Restaurant Login</Button>
+                                            </Link>
+                                        </>
+                                }
+                            </>
+                    }
                 </Toolbar>
             </AppBar>
         </div>

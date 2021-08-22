@@ -1,0 +1,20 @@
+.signupForms{
+    display: flexbox;
+    width: 500px;
+    margin: auto;
+    background-color: rgb(230, 230, 230);
+}
+.signupInputs{
+    margin: 1rem 1rem;
+    display: inline-flex;
+    padding: .5rem;
+}
+
+
+@media (max-width: 480px) {
+    .signupForms {
+      display: grid;
+      width: 250px;
+      margin: auto;
+    }
+}

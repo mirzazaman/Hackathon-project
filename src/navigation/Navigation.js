@@ -1,22 +1,26 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Tasks from '../modules/tasks/Tasks'
 import Header from '../components/header/Header'
 import NotFound from '../modules/notFound/NotFound'
-import AddTasks from '../modules/addTasks/AddTasks'
-import Login from '../modules/login/Login'
-import Logout from '../modules/logout/Logout'
-import Signup from '../modules/signup/Signup'
+import UserLogin from '../modules/userLogin/UserLogin'
+import UserLogout from '../modules/userLogout/UserLogout'
+import UserSignup from '../modules/userSignup/UserSignup'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import { useSelector } from 'react-redux'
 import useNavigation from './useNavigation'
 import { CircularProgress } from '@material-ui/core'
+import Restaurants from '../modules/restaurants/Restaurants'
+import RestaurantLogin from '../modules/restaurantLogin/RestaurantLogin'
+import RestaurantLogout from '../modules/restaurantLogout/RestaurantLogout'
+import RestaurantSignup from '../modules/restaurantSignup/RestaurantSignup'
+import AddDish from '../modules/addDish/AddDish'
 
 
 function Navigation() {
     const [reloginState] = useNavigation()
-    const loginState = useSelector(store => store.AuthReducer.isUserLogin);
+    const isUserLogin = useSelector(store => store.AuthReducer.isUserLogin);
+    const isRestLogin = useSelector(store => store.AuthReducer.isRestLogin);
 
     return (
         <>
@@ -31,17 +35,20 @@ function Navigation() {
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-                            <CircularProgress style={{ color: '#ee5c23' }} size={100} />
+                            <CircularProgress style={{ color: '#030504' }} size={100} />
                         </div>
                         :
                         <Switch>
-                            <PublicRoute component={Signup} loginState={loginState} path="/signup" />
-                            <PublicRoute component={Login} loginState={loginState} path="/login" />
+                            <PublicRoute component={RestaurantSignup} loginState={isRestLogin} path="/restaurantSignup" />
+                            <PublicRoute component={RestaurantLogin} loginState={isRestLogin} path="/restaurantLogin" />
+                            <PublicRoute component={UserSignup} loginState={isUserLogin} path="/userSignup" />
+                            <PublicRoute component={UserLogin} loginState={isUserLogin} path="/userLogin" />
 
-                            <PrivateRoute component={Logout} loginState={loginState} path="/logout" />
-                            <PrivateRoute component={AddTasks} loginState={loginState} path="/addtask" />
-                            <PrivateRoute component={Tasks} loginState={loginState} path="/" exact />
+                            <PrivateRoute component={UserLogout} loginState={isUserLogin} path="/userLogout" />
+                            <PrivateRoute component={RestaurantLogout} loginState={isRestLogin} path="/restaurantLogout" />
+                            <PrivateRoute component={AddDish} loginState={isRestLogin} path="/addDish" />
 
+                            <Route component={Restaurants} path="/" exact />
                             <Route component={NotFound} />
                         </Switch>
                 }

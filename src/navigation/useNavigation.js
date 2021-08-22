@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { reLogin } from "../store/actions/AuthAction"
+import { reLoginRest, reLoginUser } from "../store/actions/AuthAction"
 
 
 export default function useNavigation() {
@@ -9,7 +9,10 @@ export default function useNavigation() {
 
     useEffect(() => {
         dispatch(
-            reLogin(setReloginState)
+            reLoginUser(setReloginState)
+        );
+        dispatch(
+            reLoginRest(setReloginState)
         )
     }, [])
 
