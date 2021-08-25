@@ -34,7 +34,7 @@ export default function useAddDishies() {
 
             setDishName('');
             setPrice('');
-            setFoodImage(null);
+            setFoodImage('');
             setDeliveryType('Select Delivery Type')
             setCategory('Select Category')
         }
