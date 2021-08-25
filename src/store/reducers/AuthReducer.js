@@ -27,7 +27,7 @@ export default function AuthReducer(state = initialState, action) {
             return {
                 ...state,
                 user: action.payload.user,
-                restList: action.payload,
+                restList: [...state.restList, action.payload],
                 isRestLogin: true
             }
 
