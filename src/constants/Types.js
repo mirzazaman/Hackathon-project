@@ -1,5 +1,5 @@
-export const GET_DATA = "GET_DATA";
-export const ADD_DATA = "ADD_DATA";
+export const GET_REST = "GET_REST";
+export const ADD_DISH = "ADD_DISH";
 export const UPDATE_DATA = "UPDATE_DATA";
 export const DELETE_DATA = "DELETE_DATA";
 export const LOGIN_USER = "LOGIN_USER";
