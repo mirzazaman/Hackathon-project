@@ -25,9 +25,12 @@ export default function Cards({ RestaurantList }) {
                                                 height: '50%',
 
                                             }} src={item.restImage} />
-                                            <div style={{ margin: 10 }}>
-                                                <h5 style={{ textAlign: "left" }}>{item.restName}</h5>
-                                                <h5 style={{ textAlign: "left" }}>{item.restDesc}</h5>
+                                            <div>
+                                                <div style={{ display: "flex", justifyContent: 'space-between' }}>
+                                                    <h5>{item.restName}</h5>
+                                                    <h5>{item.restCity}</h5>
+                                                </div>
+                                                <h5 style={{ textAlign: "left", color: 'gray' }}>{item.restDesc}</h5>
                                             </div>
                                         </center>
 
