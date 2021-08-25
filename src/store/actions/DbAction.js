@@ -1,11 +1,11 @@
 import { db, storage } from "../../config/Firebase"
-import { ADD_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "../../constants/Types"
+import { ADD_DISH, DELETE_DATA, GET_REST, UPDATE_DATA } from "../../constants/Types"
 
 
-export const getData = (setTaskState, uid) => async (dispatch) => {
+export const getRest = (setTaskState) => async (dispatch) => {
     try {
         setTaskState(true)
-        let res = await db.collection("Tasks").doc(uid).collection('tasks').get()
+        let res = await db.collection("restaurants").get()
         let data = []
 
         res.forEach((doc) => {
@@ -16,7 +16,7 @@ export const getData = (setTaskState, uid) => async (dispatch) => {
         })
 
         dispatch({
-            type: GET_DATA,
+            type: GET_REST,
             payload: data
         })
 
@@ -30,21 +30,32 @@ export const getData = (setTaskState, uid) => async (dispatch) => {
 
 export const addDish = (data, foodImage, setAddTaskState) => async (dispatch) => {
     try {
-
-        var imageUrl = ""
-        console.log("image is running..", foodImage);
-        const uploadTask = storage.ref(`images/${foodImage.name}`).put(foodImage);
-
-        await uploadTask.on(() => {
-            storage.ref("images").child(foodImage.name).getDownloadURL().then((url) => {
-                console.log("URL IS =>", url);
-                imageUrl = url
-            });
-        }
+        setAddTaskState(true);
+        const uploadTask = storage.ref('dish images/').child(`${foodImage.name}`).put(foodImage);
+        uploadTask.on(
+            "state changed",
+            (snapshot) => { },
+            (error) => {
+                console.log("Error", error);
+            },
+            async () => {
+                storage
+                    .ref('dish images/')
+                    .child(`${foodImage.name}`)
+                    .getDownloadURL()
+                    .then(async (url) => {
+                        let obj = {
+                            ...data,
+                            restImage: url
+                        }
+                        // await db.collection()
+                        dispatch({
+                            type: ADD_DISH,
+                            payload: obj
+                        })
+                    });
+            }
         );
-
-
-        console.log("img in add act", imageUrl);
 
     } catch (error) {
         console.log("Error in addDish Action", error)

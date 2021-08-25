@@ -1,11 +1,12 @@
 import { auth, db } from '../../config/Firebase'
+import { storage } from '../../config/Firebase'
 import { LOGIN_USER, LOGOUT_USER, LOGIN_REST, LOGOUT_REST } from '../../constants/Types'
 
 export const signupUser = (data, setSignupState) => async (dispatch) => {
     try {
         setSignupState(true)
         let res = await auth.createUserWithEmailAndPassword(data.email, data.password)
-        await db.collection('Users').add(data)
+        await db.collection('users').add(data)
 
         if (res) {
             let user = res.user
@@ -89,19 +90,44 @@ export const logoutUser = (setLogoutState) => async (dispatch) => {
 
 // Restaurant Actions
 
-export const signupRest = (data, setSignupState) => async (dispatch) => {
+export const signupRest = (data, restImage, setSignupState) => async (dispatch) => {
     try {
-        setSignupState(true)
-        let res = await auth.createUserWithEmailAndPassword(data.email, data.password)
-        await db.collection('Users').add(data)
+        setSignupState(true);
 
-        if (res) {
-            let user = res.user
-            dispatch({
-                type: LOGIN_REST,
-                payload: user
-            })
-        }
+        let res = await auth.createUserWithEmailAndPassword(data.restEmail, data.restPassword)
+
+        const uploadTask = storage.ref('restaurant images/').child(`${restImage.name}`).put(restImage);
+        uploadTask.on(
+            "state changed",
+            (snapshot) => { },
+            (error) => {
+                console.log("Error", error);
+            },
+            async () => {
+                storage
+                    .ref('restaurant images/')
+                    .child(`${restImage.name}`)
+                    .getDownloadURL()
+                    .then(async (url) => {
+                        var obj = {
+                            ...data,
+                            user: res.user,
+                            restImage: url
+                        }
+                        var newData = {
+                            ...data,
+                            restImage: url
+                        }
+
+                        await db.collection('restaurants').add(newData)
+
+                        dispatch({
+                            type: LOGIN_REST,
+                            payload: obj
+                        })
+                    });
+            }
+        );
 
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {

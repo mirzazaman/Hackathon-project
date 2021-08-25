@@ -322,7 +322,7 @@ export default function Signup() {
                             onChange={(e) => { setConfirmPassword(e.target.value) }}
                             onKeyPress={(e) => { enterHandle(e) }}
                         />
-                        <Button style={{ color: '#030504', marginTop: 40 }} onClick={signupHandler} >Signup</Button>
+                        <Button className='signupInputs' style={{ color: '#030504'}} onClick={signupHandler} >Signup</Button>
                     </div>
             }
         </div>

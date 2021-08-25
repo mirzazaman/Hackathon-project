@@ -1,21 +1,22 @@
-import { ADD_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "../../constants/Types";
+import { ADD_DISH, DELETE_DATA, GET_REST, UPDATE_DATA } from "../../constants/Types";
 
 let initialState = {
-    newState: []
+    dishList: [],
+    restList: []
 }
 
 export default function DbReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_DATA:
+        case GET_REST:
             return {
                 ...state,
-                newState: action.payload
+                restList: action.payload
             }
 
-        case ADD_DATA:
+        case ADD_DISH:
             return {
                 ...state,
-                newState: [...state.newState, action.payload]
+                dishList: [...state.newState, action.payload]
             }
 
         case UPDATE_DATA:

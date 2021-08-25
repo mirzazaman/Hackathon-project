@@ -3,6 +3,7 @@ import { LOGOUT_USER, LOGIN_USER, LOGOUT_REST, LOGIN_REST } from "../../constant
 
 let initialState = {
     user: null,
+    restList: [],
     isUserLogin: false,
     isRestLogin: false,
 }
@@ -25,7 +26,8 @@ export default function AuthReducer(state = initialState, action) {
         case LOGIN_REST:
             return {
                 ...state,
-                user: action.payload,
+                user: action.payload.user,
+                restList: action.payload,
                 isRestLogin: true
             }
 
