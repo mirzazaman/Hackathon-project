@@ -6,6 +6,8 @@ import { signupRest } from "../../store/actions/AuthAction"
 export default function useRestaurantSignup() {
     const [restName, setRestName] = useState('')
     const [restEmail, setRestEmail] = useState('')
+    const [restImage, setRestImage] = useState('')
+    const [restDesc, setRestDesc] = useState('')
     const [restCountry, setRestCountry] = useState('')
     const [restCity, setRestCity] = useState('')
     const [restPassword, setRestPassword] = useState('')
@@ -28,17 +30,19 @@ export default function useRestaurantSignup() {
             let data = {
                 role: 'admin',
                 restName,
+                restDesc,
                 restCountry,
                 restCity,
                 restEmail,
                 restPassword
             }
 
-            dispatch(signupRest(data, setSignupState))
+            dispatch(signupRest(data, restImage, setSignupState))
 
             setRestName('')
             setRestEmail('')
-            setRestEmail('')
+            setRestDesc('')
+            setRestImage('')
             setRestCity('')
             setRestCountry('')
             setRestPassword('')
@@ -51,5 +55,5 @@ export default function useRestaurantSignup() {
     }
 
 
-    return [restSignupHandler, signupState, enterHandle, setRestConfirmPassword, restConfirmPassword, setRestPassword, restPassword, setRestCountry, setRestCity, setRestEmail, restEmail, setRestName, restName]
+    return [restSignupHandler, signupState, enterHandle, setRestConfirmPassword, restConfirmPassword, setRestPassword, restPassword, setRestCountry, setRestCity, setRestEmail, restEmail, setRestName, restName, setRestImage, restDesc, setRestDesc]
 }

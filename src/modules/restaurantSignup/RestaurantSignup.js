@@ -4,7 +4,7 @@ import { Button, CircularProgress } from '@material-ui/core'
 import '../../components/signupStyle/SignupStyle.css'
 
 export default function RestaurantSignup() {
-    const [restSignupHandler, signupState, enterHandle, setRestConfirmPassword, restConfirmPassword, setRestPassword, restPassword, setRestCountry, setRestCity, setRestEmail, restEmail, setRestName, restName] = useRestaurantSignup()
+    const [restSignupHandler, signupState, enterHandle, setRestConfirmPassword, restConfirmPassword, setRestPassword, restPassword, setRestCountry, setRestCity, setRestEmail, restEmail, setRestName, restName, setRestImage, restDesc, setRestDesc] = useRestaurantSignup()
 
     return (
         <div>
@@ -34,6 +34,25 @@ export default function RestaurantSignup() {
                             required
                             value={restEmail}
                             onChange={(e) => { setRestEmail(e.target.value) }}
+                            onKeyPress={(e) => { enterHandle(e) }}
+                        />
+                        <input
+                            className='signupInputs'
+                            style={styles.input}
+                            type="file"
+                            placeholder="Restaurant Image"
+                            required
+                            onChange={(e) => { setRestImage(e.target.files[0]) }}
+                            onKeyPress={(e) => { enterHandle(e) }}
+                        />
+                        <input
+                            className='signupInputs'
+                            style={styles.input}
+                            type="text"
+                            placeholder="Description of Restaurant"
+                            required
+                            value={restDesc}
+                            onChange={(e) => { setRestDesc(e.target.value) }}
                             onKeyPress={(e) => { enterHandle(e) }}
                         />
                         <select
@@ -312,7 +331,7 @@ export default function RestaurantSignup() {
                             onChange={(e) => { setRestConfirmPassword(e.target.value) }}
                             onKeyPress={(e) => { enterHandle(e) }}
                         />
-                        <Button style={{ color: '#030504', marginTop: 40 }} onClick={restSignupHandler} >Signup</Button>
+                        <Button className='signupInputs' style={{ color: '#030504'}} onClick={restSignupHandler} >Signup</Button>
                     </div>
             }
         </div>
