@@ -7,7 +7,7 @@ export default function useAddDishies() {
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState('')
     const [deliveryType, setDeliveryType] = useState('')
-    const [foodImage, setFoodImage] = useState(null)
+    const [foodImage, setFoodImage] = useState('')
     const dispatch = useDispatch()
     const [addTaskState, setAddTaskState] = useState()
 

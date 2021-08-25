@@ -41,8 +41,8 @@ export default function AddDish() {
                             onChange={(e) => { setCategory(e.target.value) }}
                         >
                             <option selected disabled>Select Category</option>
-                            <option>Breakfast</option>
                             <option>Meat Dish</option>
+                            <option>Breakfast</option>
                             <option>Dessert</option>
                             <option>Flatbread</option>
                             <option>Stew</option>
@@ -54,7 +54,7 @@ export default function AddDish() {
                             style={styles.input}
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {setFoodImage(e.target.files)}}
+                            onChange={(e) => {setFoodImage(e.target.files[0])}}
                         />
                         <select
                             style={styles.input}
