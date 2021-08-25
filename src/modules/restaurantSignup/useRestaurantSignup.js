@@ -28,7 +28,6 @@ export default function useRestaurantSignup() {
         } else if (restPassword === restConfirmPassword && restPassword.length >= 6) {
 
             let data = {
-                role: 'admin',
                 restName,
                 restDesc,
                 restCountry,

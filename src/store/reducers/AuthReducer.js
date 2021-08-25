@@ -1,4 +1,4 @@
-import { LOGOUT_USER, LOGIN_USER, LOGOUT_REST, LOGIN_REST } from "../../constants/Types";
+import { LOGOUT_USER, LOGIN_USER, LOGOUT_REST, LOGIN_REST, SIGNUP_REST } from "../../constants/Types";
 
 
 let initialState = {
@@ -23,11 +23,20 @@ export default function AuthReducer(state = initialState, action) {
                 user: action.payload,
                 isUserLogin: false
             }
-        case LOGIN_REST:
+
+        case SIGNUP_REST:
+            console.log('SIGNUP_REST', action.payload);
             return {
                 ...state,
                 user: action.payload.user,
                 restList: [...state.restList, action.payload],
+                isRestLogin: true
+            }
+
+        case LOGIN_REST:
+            return {
+                ...state,
+                user: action.payload,
                 isRestLogin: true
             }
 

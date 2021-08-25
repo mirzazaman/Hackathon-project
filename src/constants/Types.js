@@ -5,4 +5,5 @@ export const DELETE_DATA = "DELETE_DATA";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const LOGIN_REST = "LOGIN_REST";
+export const SIGNUP_REST = "SIGNUP_REST";
 export const LOGOUT_REST = "LOGOUT_REST";

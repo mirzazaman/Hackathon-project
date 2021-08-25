@@ -1,6 +1,6 @@
 import { auth, db } from '../../config/Firebase'
 import { storage } from '../../config/Firebase'
-import { LOGIN_USER, LOGOUT_USER, LOGIN_REST, LOGOUT_REST } from '../../constants/Types'
+import { LOGIN_USER, LOGOUT_USER, LOGIN_REST, SIGNUP_REST, LOGOUT_REST } from '../../constants/Types'
 
 export const signupUser = (data, setSignupState) => async (dispatch) => {
     try {
@@ -93,7 +93,6 @@ export const logoutUser = (setLogoutState) => async (dispatch) => {
 export const signupRest = (data, restImage, setSignupState) => async (dispatch) => {
     try {
         setSignupState(true);
-
         let res = await auth.createUserWithEmailAndPassword(data.restEmail, data.restPassword)
 
         const uploadTask = storage.ref('restaurant images/').child(`${restImage.name}`).put(restImage);
@@ -109,9 +108,10 @@ export const signupRest = (data, restImage, setSignupState) => async (dispatch) 
                     .child(`${restImage.name}`)
                     .getDownloadURL()
                     .then(async (url) => {
+                        let user = res.user
                         var obj = {
                             ...data,
-                            user: res.user,
+                            user,
                             restImage: url
                         }
                         var newData = {
@@ -120,9 +120,8 @@ export const signupRest = (data, restImage, setSignupState) => async (dispatch) 
                         }
 
                         await db.collection('restaurants').add(newData)
-
                         dispatch({
-                            type: LOGIN_REST,
+                            type: SIGNUP_REST,
                             payload: obj
                         })
                     });

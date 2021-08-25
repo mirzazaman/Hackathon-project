@@ -10,6 +10,7 @@ export default function useAddDishies() {
     const [foodImage, setFoodImage] = useState('')
     const dispatch = useDispatch()
     const [addTaskState, setAddTaskState] = useState()
+    const restuarantID = useSelector(store => store.AuthReducer.user.uid)
 
     const enterHandle = (e) => {
         if (e.charCode === 13) {
@@ -29,8 +30,7 @@ export default function useAddDishies() {
                 deliveryType,
 
             }
-            dispatch(addDish(data, foodImage, setAddTaskState))
-            // console.log("image", foodImage);
+            dispatch(addDish(data, foodImage, restuarantID, setAddTaskState))
 
             setDishName('');
             setPrice('');

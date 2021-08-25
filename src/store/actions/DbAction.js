@@ -2,7 +2,7 @@ import { db, storage } from "../../config/Firebase"
 import { ADD_DISH, DELETE_DATA, GET_REST, UPDATE_DATA } from "../../constants/Types"
 
 
-export const getRest = (setTaskState) => async (dispatch) => {
+export const getRest = ( setTaskState) => async (dispatch) => {
     try {
         setTaskState(true)
         let res = await db.collection("restaurants").get()
@@ -28,7 +28,7 @@ export const getRest = (setTaskState) => async (dispatch) => {
     }
 }
 
-export const addDish = (data, foodImage, setAddTaskState) => async (dispatch) => {
+export const addDish = (data, foodImage, restuarantID, setAddTaskState) => async (dispatch) => {
     try {
         setAddTaskState(true);
         const uploadTask = storage.ref('dish images/').child(`${foodImage.name}`).put(foodImage);
@@ -48,7 +48,7 @@ export const addDish = (data, foodImage, setAddTaskState) => async (dispatch) =>
                             ...data,
                             restImage: url
                         }
-                        // await db.collection()
+                        await db.collection('Dishes').doc(restuarantID).collection('dishes').add(obj)
                         dispatch({
                             type: ADD_DISH,
                             payload: obj
