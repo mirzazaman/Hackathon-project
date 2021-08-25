@@ -15,6 +15,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 
 
 const useStyles = makeStyles({
@@ -31,8 +32,6 @@ export default function SideBar() {
     const [state, setState] = useState({ left: false });
     const isUserLogin = useSelector(store => store.AuthReducer.isUserLogin)
     const isRestLogin = useSelector(store => store.AuthReducer.isRestLogin)
-    console.log('Admin state', isRestLogin);
-    console.log('User state', isUserLogin);
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -68,7 +67,7 @@ export default function SideBar() {
                         <List>
                             <Link to='/addDish'>
                                 <ListItem button>
-                                    <ListItemIcon><ExitToAppIcon style={{ color: '#291C25' }} /></ListItemIcon>
+                                    <ListItemIcon><AddToPhotosIcon style={{ color: '#291C25' }} /></ListItemIcon>
                                     <ListItemText primary={'Add Dish'} />
                                 </ListItem>
                             </Link>
